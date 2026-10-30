@@ -146,6 +146,17 @@ npm run dev
 ```
 The React frontend application will launch at `http://localhost:3000`.
 
+### Deploying on Vercel
+
+The root `vercel.json` configures separate `backend` and `frontend` services. The frontend is served for all non-API paths, while `/api/*` is routed to the backend. Frontend API requests use same-origin `/api/...` paths, so the browser does not need a backend URL or a service binding.
+
+Configure these environment variables for the Vercel project:
+
+- `MONGODB_URL`: a remotely reachable MongoDB connection string (the local `127.0.0.1` default is not available in Vercel).
+- `EMAIL_USER` and `EMAIL_PASS`: optional Gmail SMTP credentials if OTP emails should be delivered.
+
+The backend service is started from `backend/server.js`; both services are public only through their configured rewrites.
+
 ---
 
 ## 🔑 Demo Credentials for Viva / Testing

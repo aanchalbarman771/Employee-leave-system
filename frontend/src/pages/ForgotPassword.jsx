@@ -45,7 +45,7 @@ const ForgotPassword = ({ onNavigateToLogin }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/forgot-password", {
+      const response = await fetch("/api/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: cleanEmail })
@@ -85,7 +85,7 @@ const ForgotPassword = ({ onNavigateToLogin }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/forgot-password", {
+      const response = await fetch("/api/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim().toLowerCase(), otp: cleanOtp })
@@ -118,7 +118,7 @@ const ForgotPassword = ({ onNavigateToLogin }) => {
     setResending(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/forgot-password", {
+      const response = await fetch("/api/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email.trim().toLowerCase() })
@@ -161,7 +161,7 @@ const ForgotPassword = ({ onNavigateToLogin }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/forgot-password", {
+      const response = await fetch("/api/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

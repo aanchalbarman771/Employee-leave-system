@@ -14,14 +14,14 @@ const EmployeeDashboard = ({ user, onApplyLeaveClick }) => {
   const fetchDashboardData = async () => {
     try {
       // Fetch latest profile
-      const profRes = await fetch(`http://localhost:5000/api/profile?employeeId=${user.employeeId}`);
+      const profRes = await fetch(`/api/profile?employeeId=${user.employeeId}`);
       if (profRes.ok) {
         const profData = await profRes.json();
         setEmployeeData(profData);
       }
 
       // Fetch leaves
-      const leaveRes = await fetch(`http://localhost:5000/api/leaves?employeeId=${user.employeeId}`);
+      const leaveRes = await fetch(`/api/leaves?employeeId=${user.employeeId}`);
       if (leaveRes.ok) {
         const leaveData = await leaveRes.json();
         setLeaves(leaveData);

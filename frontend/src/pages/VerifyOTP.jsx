@@ -47,7 +47,7 @@ const VerifyOTP = ({ email: initialEmail, onLoginSuccess, onNavigateToLogin }) =
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/verify-otp", {
+      const response = await fetch("/api/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: targetEmail, otp: cleanOtp })
@@ -91,7 +91,7 @@ const VerifyOTP = ({ email: initialEmail, onLoginSuccess, onNavigateToLogin }) =
     setResending(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/resend-otp", {
+      const response = await fetch("/api/resend-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: targetEmail })

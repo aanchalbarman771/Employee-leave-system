@@ -48,7 +48,7 @@ const Login = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgot, onNav
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: cleanEmail, password })
@@ -113,7 +113,7 @@ const Login = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgot, onNav
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
+      const response = await fetch("/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: cleanEmail, otp: cleanOtp })
@@ -151,7 +151,7 @@ const Login = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgot, onNav
     setResending(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/resend-otp", {
+      const response = await fetch("/api/resend-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: cleanEmail })
@@ -352,4 +352,3 @@ const Login = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgot, onNav
 };
 
 export default Login;
-

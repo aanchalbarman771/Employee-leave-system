@@ -19,7 +19,7 @@ const LeaveTypes = () => {
   const fetchLeaveTypes = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/leave-types");
+      const res = await fetch("/api/leave-types");
       if (res.ok) {
         const data = await res.json();
         setLeaveTypes(data);
@@ -69,8 +69,8 @@ const LeaveTypes = () => {
 
     try {
       const endpoint = editingType
-        ? "http://localhost:5000/api/leave-types/update"
-        : "http://localhost:5000/api/leave-types/add";
+        ? "/api/leave-types/update"
+        : "/api/leave-types/add";
 
       const payload = editingType
         ? { id: editingType._id, ...formData }
@@ -110,7 +110,7 @@ const LeaveTypes = () => {
     if (!window.confirm(confirmMsg)) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/leave-types/delete", {
+      const res = await fetch("/api/leave-types/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })

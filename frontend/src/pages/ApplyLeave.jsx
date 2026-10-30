@@ -20,7 +20,7 @@ const ApplyLeave = ({ user, onSuccessRedirect }) => {
 
   const fetchLeaveTypes = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/leave-types");
+      const res = await fetch("/api/leave-types");
       if (res.ok) {
         const data = await res.json();
         if (data && data.length > 0) {
@@ -81,7 +81,7 @@ const ApplyLeave = ({ user, onSuccessRedirect }) => {
         reason: formData.reason
       };
 
-      const response = await fetch("http://localhost:5000/api/leaves/apply", {
+      const response = await fetch("/api/leaves/apply", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)

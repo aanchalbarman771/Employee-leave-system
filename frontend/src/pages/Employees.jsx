@@ -29,7 +29,7 @@ const Employees = () => {
   const fetchEmployees = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/employees");
+      const res = await fetch("/api/employees");
       if (res.ok) {
         const data = await res.json();
         setEmployees(data);
@@ -84,8 +84,8 @@ const Employees = () => {
 
     try {
       const endpoint = editingEmployee
-        ? "http://localhost:5000/api/employees/update"
-        : "http://localhost:5000/api/employees/add";
+        ? "/api/employees/update"
+        : "/api/employees/add";
 
       const payload = editingEmployee
         ? { id: editingEmployee._id, ...formData }
@@ -116,7 +116,7 @@ const Employees = () => {
     if (!window.confirm(`Are you sure you want to delete employee "${name}"?`)) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/employees/delete", {
+      const res = await fetch("/api/employees/delete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id })

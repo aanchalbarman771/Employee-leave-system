@@ -14,14 +14,14 @@ const AdminDashboard = ({ onViewAllRequestsClick }) => {
   const fetchAdminData = async () => {
     try {
       // Fetch employees count
-      const empRes = await fetch("http://localhost:5000/api/employees");
+      const empRes = await fetch("/api/employees");
       if (empRes.ok) {
         const empData = await empRes.json();
         setEmployeesCount(empData.length);
       }
 
       // Fetch leave requests
-      const leaveRes = await fetch("http://localhost:5000/api/leaves");
+      const leaveRes = await fetch("/api/leaves");
       if (leaveRes.ok) {
         const leaveData = await leaveRes.json();
         setLeaves(leaveData);

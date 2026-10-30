@@ -20,7 +20,7 @@ const MyLeaves = ({ user }) => {
   const fetchMyLeaves = async () => {
     setLoading(true);
     try {
-      let url = `http://localhost:5000/api/leaves?employeeId=${user.employeeId}`;
+      let url = `/api/leaves?employeeId=${user.employeeId}`;
       if (statusFilter !== "All") {
         url += `&status=${statusFilter}`;
       }

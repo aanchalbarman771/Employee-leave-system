@@ -17,7 +17,7 @@ const Profile = ({ user, onUpdateUser }) => {
 
   const fetchProfile = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/profile?employeeId=${user.employeeId}`);
+      const res = await fetch(`/api/profile?employeeId=${user.employeeId}`);
       if (res.ok) {
         const data = await res.json();
         setFormData({
@@ -42,7 +42,7 @@ const Profile = ({ user, onUpdateUser }) => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/profile/update", {
+      const response = await fetch("/api/profile/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

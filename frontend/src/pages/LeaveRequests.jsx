@@ -25,8 +25,8 @@ const LeaveRequests = () => {
     setLoading(true);
     try {
       const [leavesRes, empRes] = await Promise.all([
-        fetch("http://localhost:5000/api/leaves"),
-        fetch("http://localhost:5000/api/employees")
+        fetch("/api/leaves"),
+        fetch("/api/employees")
       ]);
 
       if (leavesRes.ok) {
@@ -66,7 +66,7 @@ const LeaveRequests = () => {
     if (!selectedLeave || !actionType) return;
 
     try {
-      const res = await fetch("http://localhost:5000/api/leaves/update", {
+      const res = await fetch("/api/leaves/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
