@@ -854,7 +854,12 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`Backend HTTP Server running on http://localhost:${PORT}`);
-  console.log(`(Powered by Node.js http module - Express is NOT used)`);
-});
+module.exports = server;
+
+if (process.env.NODE_ENV !== "test") {
+  server.listen(PORT, () => {
+    console.log(`Backend HTTP Server running on http://localhost:${PORT}`);
+    console.log(`(Powered by Node.js http module - Express is NOT used)`);
+  });
+}
+
