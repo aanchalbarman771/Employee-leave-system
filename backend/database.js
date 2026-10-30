@@ -19,7 +19,7 @@ async function connectDB() {
 
 async function seedSampleData() {
   try {
-    // 1. Seed Leave Types if none exist
+    // Seed default Leave Types if none exist
     const leaveTypeCount = await LeaveType.countDocuments();
     if (leaveTypeCount === 0) {
       await LeaveType.insertMany([
@@ -31,139 +31,53 @@ async function seedSampleData() {
       console.log("Seeded default Leave Types.");
     }
 
-    // 2. Seed Sample Employees if none exist
-    const employeeCount = await Employee.countDocuments();
-    if (employeeCount === 0) {
-      const sampleEmployees = [
-        {
-          employeeId: "EMP001",
-          name: "Aanchal",
-          email: "rahul@gmail.com",
-          password: "password123",
-          phone: "9876543210",
-          department: "IT",
-          designation: "Software Engineer",
-          emailVerified: true,
-          totalLeave: 24,
-          usedLeave: 3
-        },
-        {
-          employeeId: "EMP002",
-          name: "Priya Verma",
-          email: "priya@gmail.com",
-          password: "password123",
-          phone: "9876543211",
-          department: "HR",
-          designation: "HR Executive",
-          emailVerified: true,
-          totalLeave: 24,
-          usedLeave: 2
-        },
-        {
-          employeeId: "EMP003",
-          name: "Aman Kumar",
-          email: "aman@gmail.com",
-          password: "password123",
-          phone: "9876543212",
-          department: "Finance",
-          designation: "Accountant",
-          emailVerified: true,
-          totalLeave: 24,
-          usedLeave: 0
-        },
-        {
-          employeeId: "EMP004",
-          name: "Neha Singh",
-          email: "neha@gmail.com",
-          password: "password123",
-          phone: "9876543213",
-          department: "Marketing",
-          designation: "Marketing Specialist",
-          emailVerified: true,
-          totalLeave: 24,
-          usedLeave: 5
-        },
-        {
-          employeeId: "EMP005",
-          name: "Riya Gupta",
-          email: "riya@gmail.com",
-          password: "password123",
-          phone: "9876543214",
-          department: "Sales",
-          designation: "Sales Associate",
-          emailVerified: true,
-          totalLeave: 24,
-          usedLeave: 0
-        }
-      ];
+    // Remove obsolete "admin@gmail.com" System Administrator if present
+    await Employee.deleteOne({ email: "admin@gmail.com" });
 
-      await Employee.insertMany(sampleEmployees);
-      console.log("Seeded sample Employees.");
+    // Ensure Aanchal (aanchalbarman91@gmail.com) is the single Admin with ID EMP000
+    const aanchalAdmin = await Employee.findOne({ email: "aanchalbarman91@gmail.com" });
+    if (!aanchalAdmin) {
+      await Employee.create({
+        employeeId: "EMP000",
+        name: "Aanchal",
+        email: "aanchalbarman91@gmail.com",
+        password: "password123",
+        phone: "9876543210",
+        department: "Administration",
+        designation: "System Administrator",
+        emailVerified: true,
+        totalLeave: 30,
+        usedLeave: 0,
+        role: "admin"
+      });
+      console.log("Seeded Admin user Aanchal (aanchalbarman91@gmail.com / EMP000).");
+    } else if (aanchalAdmin.employeeId !== "EMP000" || aanchalAdmin.role !== "admin") {
+      aanchalAdmin.employeeId = "EMP000";
+      aanchalAdmin.role = "admin";
+      await aanchalAdmin.save();
+      console.log("Updated Aanchal to Admin with employeeId EMP000.");
+    }
 
-      // 3. Seed Sample Leave Requests
-      const sampleRequests = [
-        {
-          employeeId: "EMP001",
-          employeeName: "Rahul Sharma",
-          leaveType: "Casual Leave",
-          fromDate: "2026-10-01",
-          toDate: "2026-10-03",
-          numberOfDays: 3,
-          reason: "Attending family function",
-          status: "Approved",
-          adminResponse: "Approved. Enjoy your leave!"
-        },
-        {
-          employeeId: "EMP002",
-          employeeName: "Priya Verma",
-          leaveType: "Sick Leave",
-          fromDate: "2026-10-05",
-          toDate: "2026-10-06",
-          numberOfDays: 2,
-          reason: "Fever and rest recommended by doctor",
-          status: "Approved",
-          adminResponse: "Approved. Take rest."
-        },
-        {
-          employeeId: "EMP003",
-          employeeName: "Aman Kumar",
-          leaveType: "Earned Leave",
-          fromDate: "2026-10-10",
-          toDate: "2026-10-12",
-          numberOfDays: 3,
-          reason: "Personal vacation",
-          status: "Pending",
-          adminResponse: ""
-        },
-        {
-          employeeId: "EMP004",
-          employeeName: "Neha Singh",
-          leaveType: "Casual Leave",
-          fromDate: "2026-09-15",
-          toDate: "2026-09-19",
-          numberOfDays: 5,
-          reason: "Travel out of station",
-          status: "Approved",
-          adminResponse: "Approved."
-        },
-        {
-          employeeId: "EMP005",
-          employeeName: "Riya Gupta",
-          leaveType: "Other",
-          fromDate: "2026-10-20",
-          toDate: "2026-10-21",
-          numberOfDays: 2,
-          reason: "Urgent domestic work",
-          status: "Rejected",
-          adminResponse: "Project deadline week. Please reschedule."
-        }
-      ];
-
-      await LeaveRequest.insertMany(sampleRequests);
-      console.log("Seeded sample Leave Requests.");
+    // Seed default sample employees if none exist
+    const rahulExists = await Employee.findOne({ email: "rahul@gmail.com" });
+    if (!rahulExists) {
+      await Employee.create({
+        employeeId: "EMP001",
+        name: "Rahul Sharma",
+        email: "rahul@gmail.com",
+        password: "password123",
+        phone: "9876543211",
+        department: "IT",
+        designation: "Software Engineer",
+        emailVerified: true,
+        totalLeave: 24,
+        usedLeave: 3,
+        role: "employee"
+      });
+      console.log("Seeded sample Employee (rahul@gmail.com / password123).");
     }
   } catch (error) {
-    console.error("Error seeding sample data:", error.message);
+    console.error("Error seeding initial data:", error.message);
   }
 }
 

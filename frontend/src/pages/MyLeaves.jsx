@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import StatusBadge from "../components/StatusBadge";
+import Pagination from "../components/Pagination";
 
 const MyLeaves = ({ user }) => {
   const [leaves, setLeaves] = useState([]);
   const [statusFilter, setStatusFilter] = useState("All");
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_LIMIT = 10;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchMyLeaves();
   }, [user, statusFilter]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusFilter]);
 
   const fetchMyLeaves = async () => {
     setLoading(true);
@@ -28,6 +35,9 @@ const MyLeaves = ({ user }) => {
       setLoading(false);
     }
   };
+
+  const startIndex = (currentPage - 1) * PAGE_LIMIT;
+  const paginatedLeaves = leaves.slice(startIndex, startIndex + PAGE_LIMIT);
 
   return (
     <div>
@@ -71,7 +81,7 @@ const MyLeaves = ({ user }) => {
               </tr>
             </thead>
             <tbody>
-              {leaves.map((item) => (
+              {paginatedLeaves.map((item) => (
                 <tr key={item._id}>
                   <td><strong>{item.leaveType}</strong></td>
                   <td>{item.fromDate}</td>
@@ -84,6 +94,17 @@ const MyLeaves = ({ user }) => {
               ))}
             </tbody>
           </table>
+        )}
+
+        {/* Pagination Navigator (10 leaves per page limit) */}
+        {!loading && leaves.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalItems={leaves.length}
+            itemsPerPage={PAGE_LIMIT}
+            onPageChange={setCurrentPage}
+            itemLabel="leave records"
+          />
         )}
       </div>
     </div>

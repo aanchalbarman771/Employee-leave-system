@@ -25,33 +25,52 @@ import "./Table.css";
 function App() {
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem("leave_user");
-    return saved ? JSON.parse(saved) : null;
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return parsed ? { ...parsed, role: (parsed.role || "employee").toLowerCase() } : null;
+      } catch (e) {
+        return null;
+      }
+    }
+    return null;
   });
 
   const [authView, setAuthView] = useState("login"); // 'login', 'register', 'verify', 'forgot'
   const [verifyEmail, setVerifyEmail] = useState("");
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState(() => {
+    const saved = localStorage.getItem("leave_user");
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        return (parsed.role || "").toLowerCase() === "admin" ? "admin-dashboard" : "dashboard";
+      } catch (e) {}
+    }
+    return "dashboard";
+  });
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     if (user) {
       localStorage.setItem("leave_user", JSON.stringify(user));
-      if (user.role === "admin") {
-        setActiveTab("admin-dashboard");
-      } else {
-        setActiveTab("dashboard");
-      }
     } else {
       localStorage.removeItem("leave_user");
     }
   }, [user]);
 
   const handleLoginSuccess = (userData) => {
-    setUser(userData);
+    if (!userData) return;
+    const role = (userData.role || "employee").toLowerCase();
+    const formattedUser = { ...userData, role };
+    const defaultTab = role === "admin" ? "admin-dashboard" : "dashboard";
+    setActiveTab(defaultTab);
+    setUser(formattedUser);
   };
 
   const handleLogout = () => {
     setUser(null);
     setAuthView("login");
+    setMobileOpen(false);
   };
 
   const handleNavigateToVerify = (email) => {
@@ -64,8 +83,8 @@ function App() {
     if (authView === "register") {
       return (
         <Register
-          onNavigateToVerify={handleNavigateToVerify}
           onNavigateToLogin={() => setAuthView("login")}
+          onNavigateToVerify={handleNavigateToVerify}
         />
       );
     }
@@ -74,6 +93,7 @@ function App() {
       return (
         <VerifyOTP
           email={verifyEmail}
+          onLoginSuccess={handleLoginSuccess}
           onNavigateToLogin={() => setAuthView("login")}
         />
       );
@@ -83,6 +103,7 @@ function App() {
       return (
         <ForgotPassword
           onNavigateToLogin={() => setAuthView("login")}
+          onNavigateToVerify={handleNavigateToVerify}
         />
       );
     }
@@ -98,24 +119,32 @@ function App() {
     );
   }
 
+  const userRole = (user.role || "employee").toLowerCase();
+
   // Render Authenticated Main Application Flow
   return (
     <div className="app-container">
-      <Navbar user={user} onLogout={handleLogout} />
-      
+      <Navbar
+        user={user}
+        onLogout={handleLogout}
+        onToggleMobile={() => setMobileOpen(!mobileOpen)}
+      />
+
       <div className="main-layout">
         <Sidebar
           user={user}
           activeTab={activeTab}
           setActiveTab={setActiveTab}
           onLogout={handleLogout}
+          mobileOpen={mobileOpen}
+          onCloseMobile={() => setMobileOpen(false)}
         />
 
         <main className="content-area">
           {/* EMPLOYEE VIEWS */}
-          {user.role === "employee" && (
+          {userRole === "employee" && (
             <>
-              {activeTab === "dashboard" && (
+              {(activeTab === "dashboard" || !["apply-leave", "my-leaves", "profile"].includes(activeTab)) && (
                 <EmployeeDashboard
                   user={user}
                   onApplyLeaveClick={() => setActiveTab("apply-leave")}
@@ -129,15 +158,15 @@ function App() {
               )}
               {activeTab === "my-leaves" && <MyLeaves user={user} />}
               {activeTab === "profile" && (
-                <Profile user={user} onUpdateUser={(updated) => setUser(updated)} />
+                <Profile user={user} onUpdateUser={(updated) => setUser({ ...updated, role: (updated.role || "employee").toLowerCase() })} />
               )}
             </>
           )}
 
           {/* ADMIN VIEWS */}
-          {user.role === "admin" && (
+          {userRole === "admin" && (
             <>
-              {activeTab === "admin-dashboard" && (
+              {(activeTab === "admin-dashboard" || !["leave-requests", "employees", "leave-types"].includes(activeTab)) && (
                 <AdminDashboard
                   onViewAllRequestsClick={() => setActiveTab("leave-requests")}
                 />

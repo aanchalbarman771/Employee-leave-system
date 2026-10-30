@@ -168,12 +168,6 @@ const ApplyLeave = ({ user, onSuccessRedirect }) => {
                 placeholder="Explain reason for leave..."
                 value={formData.reason}
                 onChange={handleChange}
-                style={{
-                  width: "100%",
-                  padding: "10px",
-                  borderRadius: "var(--radius)",
-                  border: "1px solid var(--border)"
-                }}
                 required
               />
             </div>

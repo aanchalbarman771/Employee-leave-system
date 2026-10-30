@@ -1,36 +1,52 @@
-/* Data Table Styles */
+/* =========================================================
+   TABLE & MODAL STYLES (Modern Beige Theme)
+   ========================================================= */
+
 .table-container {
-  background-color: var(--white);
+  background-color: var(--bg-card);
   border-radius: var(--radius);
   border: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-subtle);
   overflow-x: auto;
+  margin-bottom: 24px;
 }
 
 .table-toolbar {
-  padding: 16px 20px;
+  padding: 20px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--border);
   gap: 16px;
   flex-wrap: wrap;
+  background-color: var(--bg-cream);
 }
 
 .search-input {
-  padding: 8px 14px;
+  padding: 10px 16px;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   font-size: 0.9rem;
-  width: 260px;
+  width: 280px;
+  background-color: var(--white);
+  color: var(--text-dark);
+  outline: none;
+  transition: var(--transition);
+}
+
+.search-input:focus {
+  border-color: var(--medium-brown);
+  box-shadow: 0 0 0 3px rgba(122, 92, 67, 0.1);
 }
 
 .filter-select {
-  padding: 8px 14px;
+  padding: 10px 16px;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   font-size: 0.9rem;
   background-color: var(--white);
+  color: var(--text-dark);
+  outline: none;
 }
 
 .data-table {
@@ -41,20 +57,20 @@
 }
 
 .data-table th {
-  background-color: #f8fafc;
-  color: var(--text-muted);
-  font-weight: 600;
-  padding: 12px 18px;
+  background-color: var(--bg-app);
+  color: var(--dark-brown);
+  font-weight: 700;
+  padding: 14px 20px;
   border-bottom: 1px solid var(--border);
   text-transform: uppercase;
   font-size: 0.75rem;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
 }
 
 .data-table td {
-  padding: 14px 18px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border);
-  color: var(--text);
+  color: var(--text-dark);
   vertical-align: middle;
 }
 
@@ -63,99 +79,391 @@
 }
 
 .data-table tr:hover {
-  background-color: #f8fafc;
+  background-color: var(--bg-cream);
 }
 
-/* Status Badges */
+/* Status Badges (Soft Muted Tones) */
 .status-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
   text-align: center;
+  letter-spacing: 0.2px;
 }
 
 .status-pending {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
+  border: 1px solid var(--warning-border);
 }
 
 .status-approved {
-  background-color: #d1fae5;
-  color: #065f46;
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
 }
 
 .status-rejected {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: var(--danger-bg);
+  color: var(--danger-text);
+  border: 1px solid var(--danger-border);
 }
 
-/* Action buttons inside table */
+/* Role Badges */
+.role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.role-admin {
+  background-color: #EAE3D9;
+  color: var(--dark-brown);
+  border: 1px solid #D8C3A5;
+}
+
+.role-user {
+  background-color: var(--bg-app);
+  color: var(--medium-brown);
+  border: 1px solid var(--border);
+}
+
+/* Action Buttons inside Table */
 .action-group {
   display: flex;
   gap: 8px;
 }
 
 .btn-sm {
-  padding: 6px 12px;
+  padding: 6px 14px;
   font-size: 0.8rem;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   border: none;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.btn-sm:hover {
-  opacity: 0.85;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .btn-approve {
-  background-color: var(--success);
+  background-color: #4A7C59;
   color: var(--white);
+}
+
+.btn-approve:hover {
+  background-color: #386043;
 }
 
 .btn-reject {
-  background-color: var(--danger);
+  background-color: #B85B56;
   color: var(--white);
+}
+
+.btn-reject:hover {
+  background-color: #96423E;
 }
 
 .btn-edit {
-  background-color: var(--primary);
+  background-color: var(--dark-brown);
   color: var(--white);
+}
+
+.btn-edit:hover {
+  background-color: var(--medium-brown);
 }
 
 .btn-delete {
-  background-color: #64748b;
-  color: var(--white);
+  background-color: var(--bg-cream);
+  color: var(--danger-text);
+  border: 1px solid var(--danger-border);
 }
 
-/* Simple Modal */
+.btn-delete:hover {
+  background-color: var(--danger-bg);
+}
+
+/* Modal Overlay & Card */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(47, 41, 37, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(3px);
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
 }
 
 .modal-content {
   background: var(--white);
-  padding: 24px;
-  border-radius: var(--radius);
-  width: 90%;
-  max-width: 500px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 20px 40px rgba(74, 55, 40, 0.15);
+  border: 1px solid var(--border);
 }
 
 .modal-header {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  margin-bottom: 16px;
+  color: var(--dark-brown);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
+
+/* =========================================================
+   EMPLOYEE SEARCH & LEAVE HISTORY SUMMARY STYLES
+   ========================================================= */
+
+.search-bar-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 420px;
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.search-clear-btn:hover {
+  color: var(--dark-brown);
+}
+
+.employee-history-card {
+  background: linear-gradient(135deg, rgba(216, 195, 165, 0.2) 0%, rgba(250, 247, 242, 0.9) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.25s ease;
+}
+
+.history-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.history-card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dark-brown);
+}
+
+.history-stats-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 1px 3px rgba(74, 55, 40, 0.04);
+}
+
+.stat-pill-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.stat-pill-value {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--dark-brown);
+}
+
+.stat-pill-approved {
+  background: var(--success-bg);
+  border-color: var(--success-border);
+}
+
+.stat-pill-approved .stat-pill-label,
+.stat-pill-approved .stat-pill-value {
+  color: var(--success-text);
+}
+
+.stat-pill-pending {
+  background: var(--warning-bg);
+  border-color: var(--warning-border);
+}
+
+.stat-pill-pending .stat-pill-label,
+.stat-pill-pending .stat-pill-value {
+  color: var(--warning-text);
+}
+
+.stat-pill-rejected {
+  background: var(--danger-bg);
+  border-color: var(--danger-border);
+}
+
+.stat-pill-rejected .stat-pill-label,
+.stat-pill-rejected .stat-pill-value {
+  color: var(--danger-text);
+}
+
+.emp-name-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.emp-name-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--dark-brown);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+}
+
+.emp-name-btn:hover {
+  color: var(--medium-brown);
+  text-decoration: underline;
+}
+
+.emp-taken-badge {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.emp-taken-badge strong {
+  color: var(--dark-brown);
+  background: rgba(122, 92, 67, 0.08);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+/* =========================================================
+   PAGINATION NAVIGATOR STYLES
+   ========================================================= */
+
+.pagination-footer {
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  background-color: var(--bg-cream);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pagination-info {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.pagination-info strong {
+  color: var(--dark-brown);
+  font-weight: 700;
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pagination-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--white);
+  color: var(--dark-brown);
+  font-size: 0.86rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  user-select: none;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: var(--primary-beige);
+  border-color: var(--soft-brown);
+  color: var(--dark-brown);
+}
+
+.pagination-btn.active {
+  background-color: var(--dark-brown);
+  border-color: var(--dark-brown);
+  color: var(--white);
+  box-shadow: 0 2px 6px rgba(74, 55, 40, 0.2);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background-color: transparent;
+  border-color: var(--border);
+}
+
+.pagination-ellipsis {
+  padding: 0 6px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+
+

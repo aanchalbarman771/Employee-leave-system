@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Register = ({ onNavigateToVerify, onNavigateToLogin }) => {
+const Register = ({ onNavigateToLogin }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,13 +47,16 @@ const Register = ({ onNavigateToVerify, onNavigateToLogin }) => {
       if (!response.ok) {
         setMessage({ type: "danger", text: data.message || "Registration failed." });
       } else {
-        setMessage({ type: "success", text: data.message });
+        setMessage({
+          type: "success",
+          text: data.message || "Registration successful! You can now login with your email and password."
+        });
         setTimeout(() => {
-          onNavigateToVerify(formData.email);
-        }, 1500);
+          onNavigateToLogin();
+        }, 1200);
       }
     } catch (err) {
-      setMessage({ type: "danger", text: "Unable to connect to backend server." });
+      setMessage({ type: "danger", text: "Unable to connect to backend server. Make sure server is running on port 5000." });
     } finally {
       setLoading(false);
     }
@@ -61,8 +64,9 @@ const Register = ({ onNavigateToVerify, onNavigateToLogin }) => {
 
   return (
     <div className="auth-wrapper">
-      <div className="auth-card">
-        <div className="auth-header">
+      <div className="auth-card auth-card-wide">
+        <div className="auth-header center">
+          <div className="auth-logo-badge">🏛️</div>
           <h2>Employee Registration</h2>
           <p>Create your employee account for leave system</p>
         </div>

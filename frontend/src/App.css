@@ -1,19 +1,42 @@
-/* CSS Variables for Clean Professional College Project Design */
+/* =========================================================
+   MODERN BEIGE THEME - GLOBAL DESIGN SYSTEM & VARIABLES
+   ========================================================= */
 :root {
-  --primary: #2563eb;
-  --primary-hover: #1d4ed8;
-  --primary-light: #eff6ff;
-  --background: #f8fafc;
-  --white: #ffffff;
-  --text: #1e293b;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --danger: #ef4444;
-  --success: #10b981;
-  --warning: #f59e0b;
+  /* Modern Beige Palette */
+  --primary-beige: #D8C3A5;
+  --bg-app: #F5EFE6;
+  --bg-card: #FFFFFF;
+  --bg-cream: #FAF7F2;
+  --dark-brown: #4A3728;
+  --medium-brown: #7A5C43;
+  --soft-brown: #A68A72;
+  --white: #FFFFFF;
+  --text-dark: #2F2925;
+  --text-muted: #766B63;
+  --border: #E4D8C9;
+  --border-focus: #7A5C43;
+  
+  /* Status Colors (Soft Muted Tones) */
+  --success-bg: #E8F0EA;
+  --success-text: #2D5A38;
+  --success-border: #C3DCC8;
+
+  --warning-bg: #FAF0E1;
+  --warning-text: #8A5814;
+  --warning-border: #F0D7B2;
+
+  --danger-bg: #F9EBEA;
+  --danger-text: #8C322C;
+  --danger-border: #F0C4C2;
+
   --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --radius: 8px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 20px;
+
+  --shadow-subtle: 0 4px 20px rgba(74, 55, 40, 0.05), 0 1px 3px rgba(74, 55, 40, 0.03);
+  --shadow-hover: 0 10px 30px rgba(74, 55, 40, 0.1);
+  --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -24,40 +47,63 @@
 }
 
 body {
-  background-color: var(--background);
-  color: var(--text);
+  background-color: var(--bg-app);
+  color: var(--text-dark);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 .app-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--bg-app);
 }
 
-/* Navbar */
+/* =========================================================
+   NAVBAR STYLES (Cream/White Header)
+   ========================================================= */
 .navbar {
   background-color: var(--white);
-  height: 64px;
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 32px;
   border-bottom: 1px solid var(--border);
-  box-shadow: var(--shadow);
+  box-shadow: 0 2px 10px rgba(74, 55, 40, 0.03);
   position: sticky;
   top: 0;
   z-index: 100;
 }
 
-.navbar-brand {
+.navbar-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+}
+
+.mobile-toggle-btn {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--dark-brown);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
   font-size: 1.2rem;
+}
+
+.navbar-page-title {
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--primary);
-  text-decoration: none;
+  color: var(--dark-brown);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .navbar-user {
@@ -66,146 +112,280 @@ body {
   gap: 16px;
 }
 
-.user-badge {
-  background-color: var(--primary-light);
-  color: var(--primary);
-  padding: 6px 12px;
-  border-radius: 20px;
+.user-profile-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--bg-cream);
+  border: 1px solid var(--border);
+  padding: 6px 14px 6px 8px;
+  border-radius: 30px;
+}
+
+.avatar-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--primary-beige);
+  color: var(--dark-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
   font-size: 0.85rem;
   font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+.user-role-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--medium-brown);
 }
 
 .logout-btn {
   background-color: transparent;
-  color: var(--danger);
-  border: 1px solid var(--danger);
-  padding: 6px 14px;
-  border-radius: var(--radius);
+  color: var(--danger-text);
+  border: 1px solid var(--danger-border);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .logout-btn:hover {
-  background-color: var(--danger);
+  background-color: var(--danger-text);
   color: var(--white);
+  border-color: var(--danger-text);
 }
 
-/* Main Layout Grid */
+/* =========================================================
+   MAIN LAYOUT & SIDEBAR (Dark Brown Palette)
+   ========================================================= */
 .main-layout {
   display: flex;
   flex: 1;
 }
 
-/* Sidebar */
 .sidebar {
-  width: 240px;
-  background-color: var(--white);
-  border-right: 1px solid var(--border);
-  padding: 24px 0;
+  width: 270px;
+  background-color: var(--dark-brown);
+  padding: 28px 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: var(--transition);
+  z-index: 90;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 0 12px 24px 12px;
+  border-bottom: 1px solid rgba(228, 216, 201, 0.15);
+  margin-bottom: 12px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background-color: var(--primary-beige);
+  color: var(--dark-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.brand-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+
+.brand-subtitle {
+  font-size: 0.72rem;
+  color: var(--primary-beige);
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.sidebar-section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--soft-brown);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px 16px 4px 16px;
 }
 
 .sidebar-item {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 24px;
-  color: var(--text-muted);
+  padding: 12px 16px;
+  color: #FAF7F2;
   text-decoration: none;
   font-weight: 500;
-  border-left: 4px solid transparent;
+  font-size: 0.92rem;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: var(--transition);
 }
 
 .sidebar-item:hover {
-  background-color: var(--primary-light);
-  color: var(--primary);
+  background-color: rgba(216, 195, 165, 0.15);
+  color: var(--white);
+  transform: translateX(3px);
 }
 
 .sidebar-item.active {
-  background-color: var(--primary-light);
-  color: var(--primary);
-  border-left-color: var(--primary);
-  font-weight: 600;
+  background-color: var(--primary-beige);
+  color: var(--dark-brown);
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
 }
 
-/* Main Content Area */
+/* =========================================================
+   CONTENT AREA & PAGE HEADERS
+   ========================================================= */
 .content-area {
   flex: 1;
-  padding: 28px;
+  padding: 36px 40px;
   overflow-y: auto;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .page-header {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .page-title {
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   font-weight: 700;
-  color: var(--text);
+  color: var(--dark-brown);
+  letter-spacing: -0.3px;
 }
 
 .page-subtitle {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--text-muted);
   margin-top: 4px;
 }
 
-/* Alert Messages */
+/* =========================================================
+   ALERT MESSAGES (Muted Soft Tones)
+   ========================================================= */
 .alert {
-  padding: 12px 16px;
-  border-radius: var(--radius);
-  margin-bottom: 20px;
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
   font-size: 0.9rem;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: fadeIn 0.3s ease;
 }
 
 .alert-success {
-  background-color: #d1fae5;
-  color: #065f46;
-  border: 1px solid #a7f3d0;
+  background-color: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid var(--success-border);
 }
 
 .alert-danger {
-  background-color: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
+  background-color: var(--danger-bg);
+  color: var(--danger-text);
+  border: 1px solid var(--danger-border);
 }
 
 .alert-info {
-  background-color: #e0f2fe;
-  color: #075985;
-  border: 1px solid #bae6fd;
+  background-color: var(--bg-cream);
+  color: var(--dark-brown);
+  border: 1px solid var(--border);
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .main-layout {
-    flex-direction: column;
+.alert-warning {
+  background-color: var(--warning-bg);
+  color: var(--warning-text);
+  border: 1px solid var(--warning-border);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT (Mobile & Tablet Drawer)
+   ========================================================= */
+.sidebar-backdrop {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 20px;
   }
+  .mobile-toggle-btn {
+    display: flex;
+  }
+  
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(47, 41, 37, 0.5);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+  }
+
   .sidebar {
-    width: 100%;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 8px 0;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    left: -280px;
+    bottom: 0;
+    width: 270px;
+    z-index: 200;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.2);
   }
-  .sidebar-item {
-    border-left: none;
-    border-bottom: 3px solid transparent;
-    padding: 8px 16px;
-    white-space: nowrap;
+
+  .sidebar.mobile-open {
+    left: 0;
   }
-  .sidebar-item.active {
-    border-bottom-color: var(--primary);
-  }
+
   .content-area {
-    padding: 16px;
+    padding: 24px 20px;
   }
 }
+

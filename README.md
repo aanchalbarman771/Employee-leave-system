@@ -26,9 +26,8 @@ A simple, beginner-friendly **Employee Leave Management System** created for a B
 ## ✨ Features
 
 ### 👤 Employee Features:
-1. **Registration**: Input Full Name, Email, Password, Phone, Department, Designation.
-2. **Email OTP Verification**: 6-digit OTP sent via email (expires in 5 minutes).
-3. **Login & Forgot Password**: Secure authentication using simple Node & MongoDB logic.
+1. **Registration**: Input Full Name, Email, Password, Phone, Department, Designation with instant account activation.
+2. **Login & Forgot Password**: Direct credentials login and quick password reset without OTP delays.
 4. **Dashboard**: 4 metric cards (Total Leave: 24, Used Leave, Remaining Leave, Pending Requests) and recent leaves table.
 5. **Apply Leave**: Select Leave Type, From Date, To Date, Reason. Automatically calculates number of days (`To Date - From Date + 1`).
 6. **My Leaves**: Filterable list of past leave requests (Pending, Approved, Rejected).

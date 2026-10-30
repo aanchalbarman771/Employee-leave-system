@@ -11,7 +11,9 @@ const employeeSchema = new mongoose.Schema({
   designation: { type: String, required: true },
   emailVerified: { type: Boolean, default: false },
   totalLeave: { type: Number, default: 24 },
-  usedLeave: { type: Number, default: 0 }
+  usedLeave: { type: Number, default: 0 },
+  role: { type: String, enum: ["employee", "admin"], default: "employee" }
 }, { timestamps: true });
 
 module.exports = mongoose.model("Employee", employeeSchema);
+

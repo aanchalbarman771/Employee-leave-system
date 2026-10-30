@@ -77,6 +77,39 @@ const Profile = ({ user, onUpdateUser }) => {
       </div>
 
       <div className="form-container">
+        {/* Profile Avatar Header Banner */}
+        <div style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "20px",
+          padding: "20px",
+          backgroundColor: "var(--bg-cream)",
+          borderRadius: "var(--radius)",
+          border: "1px solid var(--border)",
+          marginBottom: "28px"
+        }}>
+          <div style={{
+            width: "64px",
+            height: "64px",
+            borderRadius: "50%",
+            backgroundColor: "var(--primary-beige)",
+            color: "var(--dark-brown)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "1.8rem",
+            fontWeight: "800"
+          }}>
+            {user?.name ? user.name.charAt(0).toUpperCase() : "U"}
+          </div>
+          <div>
+            <h2 style={{ fontSize: "1.3rem", color: "var(--dark-brown)", margin: 0 }}>{user?.name}</h2>
+            <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", margin: "4px 0 0 0" }}>
+              {user?.designation || "Employee"} • {user?.department || "General"}
+            </p>
+          </div>
+        </div>
+
         {message.text && (
           <div className={`alert alert-${message.type}`}>
             {message.text}

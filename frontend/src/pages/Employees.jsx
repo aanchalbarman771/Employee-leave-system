@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Pagination from "../components/Pagination";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_LIMIT = 10;
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState({ type: "", text: "" });
 
@@ -15,7 +18,8 @@ const Employees = () => {
     password: "password123",
     phone: "",
     department: "IT",
-    designation: ""
+    designation: "",
+    role: "employee"
   });
 
   useEffect(() => {
@@ -45,7 +49,8 @@ const Employees = () => {
       password: "password123",
       phone: "",
       department: "IT",
-      designation: ""
+      designation: "",
+      role: "employee"
     });
     setShowModal(true);
   };
@@ -58,7 +63,8 @@ const Employees = () => {
       password: "",
       phone: emp.phone,
       department: emp.department,
-      designation: emp.designation
+      designation: emp.designation,
+      role: emp.role || "employee"
     });
     setShowModal(true);
   };
@@ -140,11 +146,19 @@ const Employees = () => {
     );
   });
 
+  // Reset pagination to page 1 on search change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
+
+  const startIndex = (currentPage - 1) * PAGE_LIMIT;
+  const paginatedEmployees = filteredEmployees.slice(startIndex, startIndex + PAGE_LIMIT);
+
   return (
     <div>
       <div className="page-header">
         <h1 className="page-title">Employee Management</h1>
-        <p className="page-subtitle">View, add, edit, or search registered employees</p>
+        <p className="page-subtitle">View, add, edit, or search registered system users</p>
       </div>
 
       {message.text && (
@@ -178,6 +192,7 @@ const Employees = () => {
                 <th>Employee ID</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Phone</th>
                 <th>Department</th>
                 <th>Designation</th>
@@ -185,11 +200,16 @@ const Employees = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredEmployees.map((emp) => (
+              {paginatedEmployees.map((emp) => (
                 <tr key={emp._id}>
                   <td><strong>{emp.employeeId}</strong></td>
                   <td>{emp.name}</td>
                   <td>{emp.email}</td>
+                  <td>
+                    <span className={`role-badge ${emp.role === "admin" ? "role-admin" : "role-user"}`}>
+                      {emp.role === "admin" ? "👑 Admin" : "👤 Employee"}
+                    </span>
+                  </td>
                   <td>{emp.phone}</td>
                   <td>{emp.department}</td>
                   <td>{emp.designation}</td>
@@ -201,18 +221,35 @@ const Employees = () => {
                       >
                         Edit
                       </button>
-                      <button
-                        className="btn-sm btn-delete"
-                        onClick={() => handleDelete(emp._id, emp.name)}
-                      >
-                        Delete
-                      </button>
+                      {emp.role !== "admin" ? (
+                        <button
+                          className="btn-sm btn-delete"
+                          onClick={() => handleDelete(emp._id, emp.name)}
+                        >
+                          Delete
+                        </button>
+                      ) : (
+                        <span style={{ fontSize: "0.78rem", color: "var(--text-muted)", fontStyle: "italic", padding: "4px 8px" }}>
+                          Main Admin
+                        </span>
+                      )}
                     </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+        )}
+
+        {/* Pagination Navigator (10 employees per page limit) */}
+        {!loading && filteredEmployees.length > 0 && (
+          <Pagination
+            currentPage={currentPage}
+            totalItems={filteredEmployees.length}
+            itemsPerPage={PAGE_LIMIT}
+            onPageChange={setCurrentPage}
+            itemLabel="employees"
+          />
         )}
       </div>
 
@@ -224,6 +261,14 @@ const Employees = () => {
               {editingEmployee ? "✏️ Edit Employee" : "➕ Add New Employee"}
             </div>
             <form onSubmit={handleSubmit}>
+              <div className="form-group" style={{ marginBottom: "12px" }}>
+                <label>System Role *</label>
+                <select name="role" value={formData.role} onChange={handleChange}>
+                  <option value="employee">Employee</option>
+                  <option value="admin">System Admin</option>
+                </select>
+              </div>
+
               <div className="form-group" style={{ marginBottom: "12px" }}>
                 <label>Full Name *</label>
                 <input
