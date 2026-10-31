@@ -142,7 +142,7 @@ const VerifyOTP = ({ email: initialEmail, onLoginSuccess, onNavigateToLogin }) =
               type="email"
               value={targetEmail}
               onChange={(e) => setTargetEmail(e.target.value)}
-              placeholder="e.g. user@gmail.com"
+              placeholder="username@gmail.com"
               required
             />
           </div>

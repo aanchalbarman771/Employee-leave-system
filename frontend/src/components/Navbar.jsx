@@ -29,9 +29,9 @@ const Navbar = ({ user, activeTabTitle, onLogout, onToggleMobile }) => {
           </div>
         </div>
 
-        {/* <button className="logout-btn" onClick={onLogout} title="Logout of ELMS">
+        <button className="logout-btn" onClick={onLogout} title="Logout">
           Logout 🚪
-        </button> */}
+        </button>
       </div>
     </header>
   );

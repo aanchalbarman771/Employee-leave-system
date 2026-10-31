@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 
 // Pages
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import VerifyOTP from "./pages/VerifyOTP";
@@ -36,7 +37,7 @@ function App() {
     return null;
   });
 
-  const [authView, setAuthView] = useState("login"); // 'login', 'register', 'verify', 'forgot'
+  const [authView, setAuthView] = useState("home"); // 'home', 'login', 'register', 'verify', 'forgot'
   const [verifyEmail, setVerifyEmail] = useState("");
   const [activeTab, setActiveTab] = useState(() => {
     const saved = localStorage.getItem("leave_user");
@@ -69,7 +70,7 @@ function App() {
 
   const handleLogout = () => {
     setUser(null);
-    setAuthView("login");
+    setAuthView("home");
     setMobileOpen(false);
   };
 
@@ -80,10 +81,20 @@ function App() {
 
   // Render Unauthenticated Auth Flow
   if (!user) {
+    if (authView === "home") {
+      return (
+        <Home
+          onNavigateToLogin={() => setAuthView("login")}
+          onNavigateToRegister={() => setAuthView("register")}
+        />
+      );
+    }
+
     if (authView === "register") {
       return (
         <Register
           onNavigateToLogin={() => setAuthView("login")}
+          onNavigateToHome={() => setAuthView("home")}
           onNavigateToVerify={handleNavigateToVerify}
         />
       );
@@ -95,6 +106,7 @@ function App() {
           email={verifyEmail}
           onLoginSuccess={handleLoginSuccess}
           onNavigateToLogin={() => setAuthView("login")}
+          onNavigateToHome={() => setAuthView("home")}
         />
       );
     }
@@ -103,17 +115,19 @@ function App() {
       return (
         <ForgotPassword
           onNavigateToLogin={() => setAuthView("login")}
+          onNavigateToHome={() => setAuthView("home")}
           onNavigateToVerify={handleNavigateToVerify}
         />
       );
     }
 
-    // Default: Login View
+    // Default: Login View (authView === "login")
     return (
       <Login
         onLoginSuccess={handleLoginSuccess}
         onNavigateToRegister={() => setAuthView("register")}
         onNavigateToForgot={() => setAuthView("forgot")}
+        onNavigateToHome={() => setAuthView("home")}
         onNavigateToVerify={handleNavigateToVerify}
       />
     );

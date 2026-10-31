@@ -68,8 +68,18 @@ const Login = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgot, onNav
           isWrongPass: isWrongPassword
         });
       } else if (data.requiresOTP) {
-        // Credentials verified! Move to Step 2 for OTP and clear info message
-        setMessage({ type: "", text: "" });
+        // Credentials verified! Move to Step 2 for OTP
+        if (data.sentToMail === false && data.fallbackOtp) {
+          setMessage({
+            type: "warning",
+            text: `Email delivery issue. Use OTP code from terminal: ${data.fallbackOtp}`
+          });
+        } else {
+          setMessage({
+            type: "info",
+            text: `A 6-digit OTP code has been sent to ${cleanEmail}. Please check your inbox.`
+          });
+        }
         setStep(2);
         setTimer(60);
         setCanResend(false);
@@ -222,7 +232,7 @@ const Login = ({ onLoginSuccess, onNavigateToRegister, onNavigateToForgot, onNav
                 <label>Email Address *</label>
                 <input
                   type="email"
-                  placeholder="e.g. rahul@gmail.com or aanchalbarman91@gmail.com"
+                  placeholder="username@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required

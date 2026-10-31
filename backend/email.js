@@ -12,6 +12,7 @@ async function sendOTPEmail(userEmail, otp) {
   
   console.log(`\n==========================================`);
   console.log(`[OTP GENERATED] Target Email: ${normalizedEmail}`);
+  console.log(`[OTP CODE]: ${otp}`);
   console.log(`==========================================\n`);
 
   const emailUser = process.env.EMAIL_USER ? process.env.EMAIL_USER.trim() : "";

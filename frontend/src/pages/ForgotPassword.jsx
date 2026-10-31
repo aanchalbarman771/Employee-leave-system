@@ -240,7 +240,7 @@ const ForgotPassword = ({ onNavigateToLogin }) => {
               <label>Registered Email Address *</label>
               <input
                 type="email"
-                placeholder="e.g. user@gmail.com"
+                placeholder="username@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required

@@ -1,0 +1,289 @@
+/* =========================================================
+   SIMPLE & SOBER HOME PAGE STYLES (Clean Institutional Design)
+   ========================================================= */
+
+.sober-home {
+  min-height: 100vh;
+  background-color: var(--bg-app);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--text-dark);
+  font-family: var(--font-family);
+}
+
+/* 1. Header */
+.sober-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(74, 55, 40, 0.04);
+}
+
+.sober-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sober-brand-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--primary-beige);
+  color: var(--dark-brown);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  border: 1px solid var(--border);
+}
+
+.sober-brand-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--dark-brown);
+  letter-spacing: -0.2px;
+}
+
+.sober-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-sober-login {
+  background: transparent;
+  color: var(--dark-brown);
+  border: 1.5px solid var(--border);
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-sober-login:hover {
+  background: var(--bg-cream);
+  border-color: var(--medium-brown);
+}
+
+.btn-sober-register {
+  background: var(--dark-brown);
+  color: var(--white);
+  border: none;
+  padding: 8px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-sober-register:hover {
+  background: #36281D;
+}
+
+/* 2. Main Hero Content */
+.sober-main {
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 50px 24px 30px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sober-badge {
+  display: inline-block;
+  background: var(--bg-cream);
+  border: 1px solid var(--border);
+  color: var(--medium-brown);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.sober-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--dark-brown);
+  line-height: 1.25;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+
+.sober-desc {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 660px;
+  margin-bottom: 42px;
+}
+
+.sober-cta-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 44px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-sober-primary {
+  background: var(--dark-brown);
+  color: var(--white);
+  border: none;
+  padding: 13px 32px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 14px rgba(74, 55, 40, 0.12);
+}
+
+.btn-sober-primary:hover {
+  background: #36281D;
+  transform: translateY(-1px);
+}
+
+.btn-sober-secondary {
+  background: var(--white);
+  color: var(--dark-brown);
+  border: 1.5px solid var(--border);
+  padding: 13px 28px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-sober-secondary:hover {
+  background: var(--bg-cream);
+  border-color: var(--medium-brown);
+  transform: translateY(-1px);
+}
+
+/* 3. Three Clean Cards */
+.sober-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+.sober-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 20px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(74, 55, 40, 0.03);
+  transition: var(--transition);
+}
+
+.sober-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--medium-brown);
+  box-shadow: 0 6px 18px rgba(74, 55, 40, 0.06);
+}
+
+.sober-card-icon {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+.sober-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--dark-brown);
+  margin-bottom: 8px;
+}
+
+.sober-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* 4. Demo Helper Banner */
+.sober-demo-hint {
+  background: var(--bg-cream);
+  border: 1px dashed var(--soft-brown);
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  font-size: 0.84rem;
+  color: var(--dark-brown);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sober-demo-hint code {
+  background: var(--white);
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.82rem;
+  border: 1px solid var(--border);
+}
+
+/* 5. Minimal Footer */
+.sober-footer {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 18px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.sober-footer-links {
+  display: flex;
+  gap: 18px;
+}
+
+.sober-footer-links span {
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.sober-footer-links span:hover {
+  color: var(--dark-brown);
+}
+
+@media (max-width: 768px) {
+  .sober-header {
+    padding: 14px 20px;
+  }
+  .sober-title {
+    font-size: 1.9rem;
+  }
+  .sober-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  .sober-footer {
+    padding: 16px 20px;
+    flex-direction: column;
+    text-align: center;
+  }
+}
+

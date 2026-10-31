@@ -246,8 +246,12 @@ const server = http.createServer(async (req, res) => {
       const mailResult = await sendOTPEmail(normalizedEmail, generatedOtp);
 
       if (!mailResult.sentToMail) {
-        return sendJSON(res, 500, {
-          message: `Unable to send OTP email to ${normalizedEmail}. Please verify your internet connection or email configuration.`
+        console.warn(`⚠️ [OFFLINE / DEMO] Resend OTP email failed (${mailResult.error || "delivery issue"}). OTP code: ${generatedOtp}`);
+        return sendJSON(res, 200, {
+          message: `Notice: Email delivery failed. Demo OTP printed in server console: ${generatedOtp}`,
+          email: normalizedEmail,
+          sentToMail: false,
+          fallbackOtp: generatedOtp
         });
       }
 
@@ -295,8 +299,12 @@ const server = http.createServer(async (req, res) => {
       const mailResult = await sendOTPEmail(normalizedEmail, generatedOtp);
 
       if (!mailResult.sentToMail) {
-        return sendJSON(res, 500, {
-          message: `Unable to send OTP email to ${normalizedEmail}. Please verify your internet connection or email configuration.`
+        console.warn(`⚠️ [OFFLINE / DEMO] Send login OTP email failed (${mailResult.error || "delivery issue"}). OTP code: ${generatedOtp}`);
+        return sendJSON(res, 200, {
+          message: `Notice: Email delivery failed. Demo OTP printed in server console: ${generatedOtp}`,
+          email: normalizedEmail,
+          sentToMail: false,
+          fallbackOtp: generatedOtp
         });
       }
 
@@ -411,8 +419,13 @@ const server = http.createServer(async (req, res) => {
       const mailResult = await sendOTPEmail(normalizedEmail, generatedOtp);
 
       if (!mailResult.sentToMail) {
-        return sendJSON(res, 500, {
-          message: `Unable to send verification OTP to ${normalizedEmail}. Please check your internet connection or email configuration.`
+        console.warn(`⚠️ [OFFLINE / DEMO] Login OTP email failed (${mailResult.error || "delivery issue"}). OTP code: ${generatedOtp}`);
+        return sendJSON(res, 200, {
+          message: `Notice: Email delivery failed. Demo OTP printed in server console: ${generatedOtp}`,
+          requiresOTP: true,
+          email: normalizedEmail,
+          sentToMail: false,
+          fallbackOtp: generatedOtp
         });
       }
 
@@ -451,8 +464,13 @@ const server = http.createServer(async (req, res) => {
         const mailResult = await sendOTPEmail(normalizedEmail, generatedOtp);
 
         if (!mailResult.sentToMail) {
-          return sendJSON(res, 500, {
-            message: `Unable to send password reset OTP to ${normalizedEmail}. Please check your internet connection or email configuration.`
+          console.warn(`⚠️ [OFFLINE / DEMO] Forgot password email failed (${mailResult.error || "delivery issue"}). OTP code: ${generatedOtp}`);
+          return sendJSON(res, 200, {
+            message: `Notice: Email delivery failed. Demo OTP printed in server console: ${generatedOtp}`,
+            requiresOTP: true,
+            email: normalizedEmail,
+            sentToMail: false,
+            fallbackOtp: generatedOtp
           });
         }
 

@@ -95,7 +95,7 @@ const Register = ({ onNavigateToLogin }) => {
             <input
               type="email"
               name="email"
-              placeholder="e.g. rahul@gmail.com"
+              placeholder="username@gmail.com"
               value={formData.email}
               onChange={handleChange}
               required
